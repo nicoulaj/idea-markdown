@@ -44,6 +44,7 @@ import org.pegdown.PegDownProcessor;
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -65,6 +66,10 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
     /** The path to the stylesheet used for displaying the HTML preview of the document. */
     @NonNls
     public static final String PREVIEW_STYLESHEET_PATH = "/net/nicoulaj/idea/markdown/preview.css";
+
+    /** The path to the dark theme stylesheet used for displaying the HTML preview of the document. */
+    @NonNls
+    public static final String PREVIEW_STYLESHEET_PATH_DARCULA = "/net/nicoulaj/idea/markdown/preview-darcula.css";
 
     /** The MarkdownJ {@link PegDownProcessor} used to generate HTML from Markdown. */
     protected PegDownProcessor markdownProcessor = new PegDownProcessor(MarkdownGlobalSettings.getInstance().getExtensionsValue());
@@ -109,7 +114,15 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
         // Setup the editor pane for rendering HTML.
         final HTMLEditorKit kit = new MarkdownEditorKit(document);
         final StyleSheet style = new StyleSheet();
-        style.importStyleSheet(MarkdownPreviewEditor.class.getResource(PREVIEW_STYLESHEET_PATH));
+        String cssFile;
+
+        if (MetalLookAndFeel.getCurrentTheme().getName().toLowerCase().contains("darcula")) {
+            cssFile = PREVIEW_STYLESHEET_PATH_DARCULA;
+        } else {
+            cssFile = PREVIEW_STYLESHEET_PATH;
+        }
+
+        style.importStyleSheet(MarkdownPreviewEditor.class.getResource(cssFile));
         kit.setStyleSheet(style);
         jEditorPane.setEditorKit(kit);
         jEditorPane.setEditable(false);
