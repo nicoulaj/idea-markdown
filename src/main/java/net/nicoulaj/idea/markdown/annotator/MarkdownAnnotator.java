@@ -28,6 +28,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import net.nicoulaj.idea.markdown.Compatibility;
 import net.nicoulaj.idea.markdown.highlighter.MarkdownSyntaxHighlighter;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettings;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettingsListener;
@@ -50,7 +51,7 @@ import static net.nicoulaj.idea.markdown.lang.MarkdownTokenTypes.*;
  * @author Julien Nicoulaud <julien.nicoulaud@gmail.com>
  * @since 0.4
  */
-public class MarkdownAnnotator extends ExternalAnnotator<String, Set<MarkdownAnnotator.HighlightableToken>> {
+public class MarkdownAnnotator extends Compatibility.ExternalAnnotatorHack<String, Set<MarkdownAnnotator.HighlightableToken>> {
 
     /** Logger. */
     private static final Logger LOGGER = Logger.getInstance(MarkdownAnnotator.class);
@@ -83,7 +84,7 @@ public class MarkdownAnnotator extends ExternalAnnotator<String, Set<MarkdownAnn
      * @return the file text.
      */
     @Nullable @Override
-    public String collectInformation(@NotNull PsiFile file) {
+    public String hackCollectInformation(@NotNull PsiFile file) {
         return file.getText();
     }
 
