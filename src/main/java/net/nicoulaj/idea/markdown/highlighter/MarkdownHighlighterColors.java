@@ -22,8 +22,8 @@ package net.nicoulaj.idea.markdown.highlighter;
 
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 
-import static com.intellij.openapi.editor.DefaultLanguageHighlighterColors.*;
-import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static net.nicoulaj.idea.markdown.Compatibility.DefaultLanguageHighlighterColorsEnum.*;
+import static net.nicoulaj.idea.markdown.Compatibility.createTextAttributesKey;
 
 /**
  * The default styles for each of token defined for Markdown.
