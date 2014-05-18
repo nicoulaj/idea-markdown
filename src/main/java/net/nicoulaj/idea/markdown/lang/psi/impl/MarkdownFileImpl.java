@@ -64,8 +64,10 @@ public class MarkdownFileImpl extends PsiFileBase implements MarkdownFile {
     public VirtualFile getVirtualFile() {
         final VirtualFile file =  super.getVirtualFile();
 
-        // #138: ignore "strip trailing white space" setting
-        file.putUserData(OVERRIDE_STRIP_TRAILING_SPACES_KEY, STRIP_TRAILING_SPACES_NONE);
+        if (file != null) {
+            // #138: ignore "strip trailing white space" setting
+            file.putUserData(OVERRIDE_STRIP_TRAILING_SPACES_KEY, STRIP_TRAILING_SPACES_NONE);
+        }
 
         return file;
     }
