@@ -41,16 +41,16 @@ import com.intellij.util.ui.UIUtil;
 import net.nicoulaj.idea.markdown.MarkdownBundle;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettings;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettingsListener;
+import org.apache.batik.svggen.font.Point;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.pegdown.PegDownProcessor;
 
-import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -149,7 +149,7 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
         final StyleSheet style = new StyleSheet();
         String customStylesheetPath = MarkdownGlobalSettings.getInstance().getCustomStylesheetPath();
         URL styleSheetResource = null;
-        if (customStylesheetPath != null && customStylesheetPath.trim().length() > 0) {
+        if (StringUtils.isNotBlank(customStylesheetPath)) {
             try {
                 styleSheetResource = new File(customStylesheetPath).toURI().toURL();
             } catch (MalformedURLException e) {
