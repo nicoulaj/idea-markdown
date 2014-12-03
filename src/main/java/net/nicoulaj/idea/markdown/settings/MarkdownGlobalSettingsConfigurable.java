@@ -103,7 +103,10 @@ public class MarkdownGlobalSettingsConfigurable implements SearchableConfigurabl
      * @return the UI main panel.
      */
     public JComponent createComponent() {
-        if (settingsPanel == null) settingsPanel = new MarkdownSettingsPanel();
+        if (settingsPanel == null) {
+            settingsPanel = new MarkdownSettingsPanel();
+            settingsPanel.init();
+        }
         reset();
         return settingsPanel.panel;
     }
@@ -127,7 +130,8 @@ public class MarkdownGlobalSettingsConfigurable implements SearchableConfigurabl
                || settingsPanel.suppressHTMLBlocksCheckBox == null || globalSettings.isSuppressHTMLBlocks() != settingsPanel.suppressHTMLBlocksCheckBox.isSelected()
                || settingsPanel.suppressInlineHTMLCheckBox == null || globalSettings.isSuppressInlineHTML() != settingsPanel.suppressInlineHTMLCheckBox.isSelected()
                || settingsPanel.tablesCheckBox == null || globalSettings.isTables() != settingsPanel.tablesCheckBox.isSelected()
-               || settingsPanel.strikethroughCheckBox == null || globalSettings.isStrikethrough() != settingsPanel.strikethroughCheckBox.isSelected();
+               || settingsPanel.strikethroughCheckBox == null || globalSettings.isStrikethrough() != settingsPanel.strikethroughCheckBox.isSelected()
+               || !globalSettings.getCustomStylesheetPath().equals(settingsPanel.getCustomStylesheetPath());
     }
 
     /** Apply modifications to the settings done in the UI. */
@@ -146,6 +150,7 @@ public class MarkdownGlobalSettingsConfigurable implements SearchableConfigurabl
             globalSettings.setSuppressInlineHTML(settingsPanel.suppressInlineHTMLCheckBox != null && settingsPanel.suppressInlineHTMLCheckBox.isSelected());
             globalSettings.setTables(settingsPanel.tablesCheckBox != null && settingsPanel.tablesCheckBox.isSelected());
             globalSettings.setStrikethrough(settingsPanel.strikethroughCheckBox != null && settingsPanel.strikethroughCheckBox.isSelected());
+            globalSettings.setCustomStylesheetPath(settingsPanel.getCustomStylesheetPath());
         }
     }
 
@@ -165,6 +170,7 @@ public class MarkdownGlobalSettingsConfigurable implements SearchableConfigurabl
             if (settingsPanel.suppressInlineHTMLCheckBox != null) settingsPanel.suppressInlineHTMLCheckBox.setSelected(globalSettings.isSuppressInlineHTML());
             if (settingsPanel.tablesCheckBox != null) settingsPanel.tablesCheckBox.setSelected(globalSettings.isTables());
             if (settingsPanel.strikethroughCheckBox != null) settingsPanel.strikethroughCheckBox.setSelected(globalSettings.isStrikethrough());
+            settingsPanel.setCustomStylesheetPath(globalSettings.getCustomStylesheetPath());
         }
     }
 
