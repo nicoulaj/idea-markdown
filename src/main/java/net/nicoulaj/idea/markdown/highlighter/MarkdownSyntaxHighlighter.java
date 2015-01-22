@@ -20,12 +20,12 @@
  */
 package net.nicoulaj.idea.markdown.highlighter;
 
-import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import net.nicoulaj.idea.markdown.lang.MarkdownTokenTypeSets;
+import net.nicoulaj.idea.markdown.lang.lexer.MarkdownLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -40,7 +40,7 @@ import java.util.Map;
 public class MarkdownSyntaxHighlighter extends SyntaxHighlighterBase {
 
     /** The {@link Lexer} instance. */
-    protected final Lexer lexer = new EmptyLexer();
+    protected final Lexer lexer = new MarkdownLexerAdapter();
 
     /** The map of text attribute keys for each token type. */
     protected static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
@@ -56,42 +56,24 @@ public class MarkdownSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.HEADER_LEVEL_5_SET, MarkdownHighlighterColors.HEADER_LEVEL_5_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.HEADER_LEVEL_6_SET, MarkdownHighlighterColors.HEADER_LEVEL_6_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.CODE_SET, MarkdownHighlighterColors.CODE_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.QUOTE_SET, MarkdownHighlighterColors.QUOTE_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_SET, MarkdownHighlighterColors.TABLE_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.HRULE_SET, MarkdownHighlighterColors.HRULE_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.SPECIAL_TEXT_SET, MarkdownHighlighterColors.SPECIAL_TEXT_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.STRIKETHROUGH_SET, MarkdownHighlighterColors.STRIKETHROUGH_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.EXPLICIT_LINK_SET, MarkdownHighlighterColors.EXPLICIT_LINK_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.IMAGE_SET, MarkdownHighlighterColors.IMAGE_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.REFERENCE_IMAGE_SET, MarkdownHighlighterColors.REFERENCE_IMAGE_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.REFERENCE_LINK_SET, MarkdownHighlighterColors.REFERENCE_LINK_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.WIKI_LINK_SET, MarkdownHighlighterColors.WIKI_LINK_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.AUTO_LINK_SET, MarkdownHighlighterColors.AUTO_LINK_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.MAIL_LINK_SET, MarkdownHighlighterColors.MAIL_LINK_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.VERBATIM_SET, MarkdownHighlighterColors.VERBATIM_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.BLOCK_QUOTE_SET, MarkdownHighlighterColors.BLOCK_QUOTE_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.BULLET_LIST_SET, MarkdownHighlighterColors.BULLET_LIST_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.ORDERED_LIST_SET, MarkdownHighlighterColors.ORDERED_LIST_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.LIST_ITEM_SET, MarkdownHighlighterColors.LIST_ITEM_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.DEFINITION_LIST_SET, MarkdownHighlighterColors.DEFINITION_LIST_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.DEFINITION_SET, MarkdownHighlighterColors.DEFINITION_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.DEFINITION_TERM_SET, MarkdownHighlighterColors.DEFINITION_TERM_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_BODY_SET, MarkdownHighlighterColors.TABLE_BODY_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_CELL_SET, MarkdownHighlighterColors.TABLE_CELL_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_COLUMN_SET, MarkdownHighlighterColors.TABLE_COLUMN_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_HEADER_SET, MarkdownHighlighterColors.TABLE_HEADER_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_ROW_SET, MarkdownHighlighterColors.TABLE_ROW_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.TABLE_CAPTION_SET, MarkdownHighlighterColors.TABLE_CAPTION_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.HTML_BLOCK_SET, MarkdownHighlighterColors.HTML_BLOCK_ATTR_KEY);
         fillMap(ATTRIBUTES, MarkdownTokenTypeSets.INLINE_HTML_SET, MarkdownHighlighterColors.INLINE_HTML_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.REFERENCE_SET, MarkdownHighlighterColors.REFERENCE_ATTR_KEY);
-        fillMap(ATTRIBUTES, MarkdownTokenTypeSets.ABBREVIATION_SET, MarkdownHighlighterColors.ABBREVIATION_ATTR_KEY);
     }
 
     /**
      * Get the lexer used for highlighting a Markdown file.
      *
-     * @return an {@link EmptyLexer}.
+     * @return an {@link MarkdownLexerAdapter}.
      * @see #lexer
      */
     @NotNull

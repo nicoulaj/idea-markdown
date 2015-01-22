@@ -23,6 +23,8 @@ package net.nicoulaj.idea.markdown.lang;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 
+import static net.nicoulaj.idea.markdown.lang.MarkdownElementType.platformType;
+
 /**
  * Lexer tokens for the Markdown language.
  *
@@ -31,123 +33,53 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface MarkdownTokenTypes extends TokenType {
 
-    /** Plain text token type. */
-    IElementType TEXT = new MarkdownElementType("TEXT");
+            IElementType TEXT = platformType(org.intellij.markdown.MarkdownTokenTypes.TEXT);
 
-    /** Bold text token type. */
-    IElementType BOLD = new MarkdownElementType("BOLD");
+            IElementType CODE = platformType(org.intellij.markdown.MarkdownTokenTypes.CODE);
 
-    /** Italic token type. */
-    IElementType ITALIC = new MarkdownElementType("ITALIC");
+            IElementType BLOCK_QUOTE = platformType(org.intellij.markdown.MarkdownTokenTypes.BLOCK_QUOTE);
 
-    /** Header of level 1 token type. */
-    IElementType HEADER_LEVEL_1 = new MarkdownElementType("HEADER_LEVEL_1");
+            IElementType HTML_BLOCK = platformType(org.intellij.markdown.MarkdownTokenTypes.HTML_BLOCK);
 
-    /** Header of level 2 token type. */
-    IElementType HEADER_LEVEL_2 = new MarkdownElementType("HEADER_LEVEL_2");
+            IElementType SINGLE_QUOTE = platformType(org.intellij.markdown.MarkdownTokenTypes.SINGLE_QUOTE);
+            IElementType DOUBLE_QUOTE = platformType(org.intellij.markdown.MarkdownTokenTypes.DOUBLE_QUOTE);
+            IElementType LPAREN = platformType(org.intellij.markdown.MarkdownTokenTypes.LPAREN);
+            IElementType RPAREN = platformType(org.intellij.markdown.MarkdownTokenTypes.RPAREN);
+            IElementType LBRACKET = platformType(org.intellij.markdown.MarkdownTokenTypes.LBRACKET);
+            IElementType RBRACKET = platformType(org.intellij.markdown.MarkdownTokenTypes.RBRACKET);
+            IElementType LT = platformType(org.intellij.markdown.MarkdownTokenTypes.LT);
+            IElementType GT = platformType(org.intellij.markdown.MarkdownTokenTypes.GT);
 
-    /** Header of level 3 token type. */
-    IElementType HEADER_LEVEL_3 = new MarkdownElementType("HEADER_LEVEL_3");
+            IElementType COLON = platformType(org.intellij.markdown.MarkdownTokenTypes.COLON);
+            IElementType EXCLAMATION_MARK = platformType(org.intellij.markdown.MarkdownTokenTypes.EXCLAMATION_MARK);
 
-    /** Header of level 4 token type. */
-    IElementType HEADER_LEVEL_4 = new MarkdownElementType("HEADER_LEVEL_4");
 
-    /** Header of level 5 token type. */
-    IElementType HEADER_LEVEL_5 = new MarkdownElementType("HEADER_LEVEL_5");
+            IElementType HARD_LINE_BREAK = platformType(org.intellij.markdown.MarkdownTokenTypes.HARD_LINE_BREAK);
+            IElementType EOL = platformType(org.intellij.markdown.MarkdownTokenTypes.EOL);
 
-    /** Header of level 6 token type. */
-    IElementType HEADER_LEVEL_6 = new MarkdownElementType("HEADER_LEVEL_6");
+            IElementType LINK_ID = platformType(org.intellij.markdown.MarkdownTokenTypes.LINK_ID);
+            IElementType ATX_HEADER = platformType(org.intellij.markdown.MarkdownTokenTypes.ATX_HEADER);
+            IElementType EMPH = platformType(org.intellij.markdown.MarkdownTokenTypes.EMPH);
 
-    /** Code token type. */
-    IElementType CODE = new MarkdownElementType("CODE");
+            IElementType BACKTICK = platformType(org.intellij.markdown.MarkdownTokenTypes.BACKTICK);
+            IElementType ESCAPED_BACKTICKS = platformType(org.intellij.markdown.MarkdownTokenTypes.ESCAPED_BACKTICKS);
 
-    /** Quote token type. */
-    IElementType QUOTE = new MarkdownElementType("QUOTE");
+            IElementType TAG_NAME = platformType(org.intellij.markdown.MarkdownTokenTypes.TAG_NAME);
+            IElementType LIST_BULLET = platformType(org.intellij.markdown.MarkdownTokenTypes.LIST_BULLET);
+            IElementType URL = platformType(org.intellij.markdown.MarkdownTokenTypes.URL);
+            IElementType HORIZONTAL_RULE = platformType(org.intellij.markdown.MarkdownTokenTypes.HORIZONTAL_RULE);
+            IElementType SETEXT_1 = platformType(org.intellij.markdown.MarkdownTokenTypes.SETEXT_1);
+            IElementType SETEXT_2 = platformType(org.intellij.markdown.MarkdownTokenTypes.SETEXT_2);
+            IElementType LIST_NUMBER = platformType(org.intellij.markdown.MarkdownTokenTypes.LIST_NUMBER);
+            IElementType FENCE_LANG = platformType(org.intellij.markdown.MarkdownTokenTypes.FENCE_LANG);
+            IElementType CODE_FENCE_START = platformType(org.intellij.markdown.MarkdownTokenTypes.CODE_FENCE_START);
+            IElementType CODE_FENCE_END = platformType(org.intellij.markdown.MarkdownTokenTypes.CODE_FENCE_END);
+            IElementType LINK_TITLE = platformType(org.intellij.markdown.MarkdownTokenTypes.LINK_TITLE);
 
-    /** Table token type. */
-    IElementType TABLE = new MarkdownElementType("TABLE");
+            IElementType AUTOLINK = platformType(org.intellij.markdown.MarkdownTokenTypes.AUTOLINK);
+            IElementType EMAIL_AUTOLINK = platformType(org.intellij.markdown.MarkdownTokenTypes.EMAIL_AUTOLINK);
+            IElementType HTML_TAG = platformType(org.intellij.markdown.MarkdownTokenTypes.HTML_TAG);
 
-    /** HRule token type. */
-    IElementType HRULE = new MarkdownElementType("HRULE");
-
-    /** Special text token type. */
-    IElementType SPECIAL_TEXT = new MarkdownElementType("SPECIAL_TEXT");
-
-    /** Strikethrough token type. */
-    IElementType STRIKETHROUGH = new MarkdownElementType("STRIKETHROUGH");
-
-    /** Link token type. */
-    IElementType EXPLICIT_LINK = new MarkdownElementType("EXPLICIT_LINK");
-
-    /** Image token type. */
-    IElementType IMAGE = new MarkdownElementType("IMAGE");
-
-    /** Reference image token type. */
-    IElementType REFERENCE_IMAGE = new MarkdownElementType("REFERENCE_IMAGE");
-
-    /** Reference link token type. */
-    IElementType REFERENCE_LINK = new MarkdownElementType("REFERENCE_LINK");
-
-    /** Wiki link token type. */
-    IElementType WIKI_LINK = new MarkdownElementType("WIKI_LINK");
-
-    /** Auto link token type. */
-    IElementType AUTO_LINK = new MarkdownElementType("AUTO_LINK");
-
-    /** Mail link token type. */
-    IElementType MAIL_LINK = new MarkdownElementType("MAIL_LINK");
-
-    /** Verbatim token type. */
-    IElementType VERBATIM = new MarkdownElementType("VERBATIM");
-
-    /** Block quote token type. */
-    IElementType BLOCK_QUOTE = new MarkdownElementType("BLOCK_QUOTE");
-
-    /** Bullet list token type. */
-    IElementType BULLET_LIST = new MarkdownElementType("BULLET_LIST");
-
-    /** Ordered list token type. */
-    IElementType ORDERED_LIST = new MarkdownElementType("ORDERED_LIST");
-
-    /** List item token type. */
-    IElementType LIST_ITEM = new MarkdownElementType("LIST_ITEM");
-
-    /** Definition list token type. */
-    IElementType DEFINITION_LIST = new MarkdownElementType("DEFINITION_LIST");
-
-    /** Definition token type. */
-    IElementType DEFINITION = new MarkdownElementType("DEFINITION");
-
-    /** Definition term token type. */
-    IElementType DEFINITION_TERM = new MarkdownElementType("DEFINITION_TERM");
-
-    /** Table body token type. */
-    IElementType TABLE_BODY = new MarkdownElementType("TABLE_BODY");
-
-    /** Table cell token type. */
-    IElementType TABLE_CELL = new MarkdownElementType("TABLE_CELL");
-
-    /** Table column token type. */
-    IElementType TABLE_COLUMN = new MarkdownElementType("TABLE_COLUMN");
-
-    /** Table header token type. */
-    IElementType TABLE_HEADER = new MarkdownElementType("TABLE_HEADER");
-
-    /** Table row token type. */
-    IElementType TABLE_ROW = new MarkdownElementType("TABLE_ROW");
-
-    /** Table caption token type. */
-    IElementType TABLE_CAPTION = new MarkdownElementType("TABLE_CAPTION");
-
-    /** HTML block token type. */
-    IElementType HTML_BLOCK = new MarkdownElementType("HTML_BLOCK");
-
-    /** Inline HTML token type. */
-    IElementType INLINE_HTML = new MarkdownElementType("INLINE_HTML");
-
-    /** Reference token type. */
-    IElementType REFERENCE = new MarkdownElementType("REFERENCE");
-
-    /** Abbreviation token type. */
-    IElementType ABBREVIATION = new MarkdownElementType("ABBREVIATION");
+            IElementType BAD_CHARACTER = platformType(org.intellij.markdown.MarkdownTokenTypes.BAD_CHARACTER);
+            IElementType WHITE_SPACE = platformType(org.intellij.markdown.MarkdownTokenTypes.WHITE_SPACE);
 }
