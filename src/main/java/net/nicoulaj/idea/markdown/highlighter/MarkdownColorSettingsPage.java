@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -185,7 +186,19 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
      */
     @Nullable
     public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return null;
+        final Map<String, TextAttributesKey> result = new HashMap<String, TextAttributesKey>();
+
+        result.put("hh1", MarkdownHighlighterColors.HEADER_LEVEL_1_ATTR_KEY);
+        result.put("hh2", MarkdownHighlighterColors.HEADER_LEVEL_2_ATTR_KEY);
+        result.put("hh3", MarkdownHighlighterColors.HEADER_LEVEL_3_ATTR_KEY);
+        result.put("hh4", MarkdownHighlighterColors.HEADER_LEVEL_4_ATTR_KEY);
+        result.put("hh5", MarkdownHighlighterColors.HEADER_LEVEL_5_ATTR_KEY);
+        result.put("hh6", MarkdownHighlighterColors.HEADER_LEVEL_6_ATTR_KEY);
+
+        result.put("bold", MarkdownHighlighterColors.BOLD_ATTR_KEY);
+        result.put("italic", MarkdownHighlighterColors.ITALIC_ATTR_KEY);
+
+        return result;
     }
 
     /**

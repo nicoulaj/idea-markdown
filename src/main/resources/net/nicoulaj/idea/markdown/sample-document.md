@@ -1,20 +1,20 @@
-Test Markdown document
-======================
+<hh1>Test Markdown document
+======================</hh1>
 
-Text
-----
+<hh2>Text
+----</hh2>
 
 Here is a paragraph with bold text. Here is a paragraph with bold text. Here is a paragraph with
-bold text. **Here is a paragraph with bold text.** Here is a paragraph with bold text. Here is a
+bold text. <bold>**Here is a paragraph with bold text.**</bold> Here is a paragraph with bold text. Here is a
 paragraph with bold text. Here is a paragraph with bold text. Here is a paragraph with bold text.
 
 Here is another one with italic text. Here is another one with italic text. Here is another one
-with italic text. *Here is another one with italic text.* Here is another one with italic text.
+with italic text. <italic>*Here is another one with italic text.*</italic> Here is another one with italic text.
 Here is another one with italic text. Here is another one with italic text. Here is another one
-with italic text. *Here is another one with* italic text. Here is another one with italic text.
+with italic text. <italic>*Here is another one with*</italic> italic text. Here is another one with italic text.
 
-Links
------
+<hh2>Links
+-----</hh2>
 
 Autolink: <http://example.com>
 
@@ -25,28 +25,28 @@ Reference style [link][1].
 [1]: http://example.com  "Example"
 
 
-Images
-------
+<hh2>Images
+------</hh2>
 
 Image: ![My image](http://www.foo.bar/image.png)
 
 
 
-Headers
--------
+<hh2>Headers
+-------</hh2>
 
-# First level title
-## Second level title
-### Third level title
-#### Fourth level title
-##### Fifth level title
-###### Sixth level title
+<hh1># First level title</hh1>
+<hh2>## Second level title</hh2>
+<hh3>### Third level title</hh3>
+<hh4>#### Fourth level title</hh4>
+<hh5>##### Fifth level title</hh5>
+<hh6>###### Sixth level title</hh6>
 
-### Title with [link](http://localhost)
-### Title with ![image](http://localhost)
+<hh3>### Title with [link](http://localhost)</hh3>
+<hh3>### Title with ![image](http://localhost)</hh3>
 
-Code
-----
+<hh2>Code
+----</hh2>
 
 Inline `code in a` paragraph.
 
@@ -63,8 +63,8 @@ A code block:
         return CommonBundle.message(BUNDLE, key, params);
     }
 
-Quotes
-------
+<hh2>Quotes
+------</hh2>
 
 
 > This is the first level of quoting.
@@ -88,8 +88,8 @@ Quotes
 
 
 
-Tables
--------
+<hh2>Tables
+-------</hh2>
 
 <table>
   <tr>
@@ -106,8 +106,8 @@ Tables
   </tr>
 </table>
 
-Horizontal rules
-----------------
+<hh2>Horizontal rules
+----------------</hh2>
 
 ---
 
@@ -117,8 +117,8 @@ ___
 ***
 
 
-Lists
------
+<hh2>Lists
+-----</hh2>
 
 Unordered list:
 

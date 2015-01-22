@@ -25,12 +25,13 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import net.nicoulaj.idea.markdown.highlighter.MarkdownSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
-public class MarkdownHighlightingAnnotator implements Annotator {
+public class MarkdownHighlightingAnnotator implements Annotator, DumbAware {
 
     private static final SyntaxHighlighter SYNTAX_HIGHLIGHTER = new MarkdownSyntaxHighlighter();
 
