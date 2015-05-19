@@ -201,6 +201,7 @@
 }
 
 #markdown-preview code {
+    white-space: pre;
     font-size: small;
     font-family: Monospaced, monospace;
     background-color: #dcdcdc;
