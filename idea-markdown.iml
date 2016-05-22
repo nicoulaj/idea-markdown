@@ -31,6 +31,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module" module-name="intellij-markdown" />
   </component>
 </module>
-

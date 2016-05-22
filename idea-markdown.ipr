@@ -97,36 +97,6 @@
     <entry_points version="2.0" />
   </component>
   <component name="IdProvider" IDEtalkID="30F62850CC208662F9BE7D0D7413EF35" />
-  <component name="InspectionProjectProfileManager">
-    <profiles>
-      <profile version="1.0" is_locked="false">
-        <option name="myName" value="Project Default" />
-        <option name="myLocal" value="false" />
-        <inspection_tool class="CssInvalidElementInspection" enabled="false" level="ERROR" enabled_by_default="false" />
-        <inspection_tool class="CssOptimizeSimilarPropertiesInspection" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
-        <inspection_tool class="CssUnknownProperty" enabled="true" level="WARNING" enabled_by_default="true">
-          <option name="myCustomPropertiesEnabled" value="true" />
-          <option name="myIgnoreVendorSpecificProperties" value="false" />
-          <option name="myCustomPropertiesList">
-            <value>
-              <list size="2">
-                <item index="0" class="java.lang.String" itemvalue="margin-left-ltr" />
-                <item index="1" class="java.lang.String" itemvalue="margin-right-rtl" />
-              </list>
-            </value>
-          </option>
-        </inspection_tool>
-        <inspection_tool class="Fix shebang" enabled="true" level="WARNING" enabled_by_default="true">/bin/sh#/bin/bash</inspection_tool>
-        <inspection_tool class="W3CssValidation" enabled="false" level="WARNING" enabled_by_default="false">
-          <option name="myCssVersion" value="css3" />
-          <option name="myIgnoreVendorSpecificProperties" value="false" />
-        </inspection_tool>
-      </profile>
-    </profiles>
-    <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_PROFILE" value="true" />
-    <version value="1.0" />
-  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Bureau" />
     <option name="OPTION_SCOPE" value="protected" />
@@ -348,6 +318,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/idea-markdown.iml" filepath="$PROJECT_DIR$/idea-markdown.iml" />
+      <module fileurl="file://$PROJECT_DIR$/intellij-markdown/intellij-markdown.iml" filepath="$PROJECT_DIR$/intellij-markdown/intellij-markdown.iml" />
     </modules>
   </component>
   <component name="ProjectResources">
@@ -386,7 +357,18 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/intellij-markdown" vcs="Git" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="KotlinJavaRuntime">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/kotlin-runtime.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/lib/kotlin-runtime-sources.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
 </project>
-

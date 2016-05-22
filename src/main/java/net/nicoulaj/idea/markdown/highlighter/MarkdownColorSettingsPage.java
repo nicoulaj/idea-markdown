@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -92,20 +93,8 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
                                          MarkdownHighlighterColors.ITALIC_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
-                                         MarkdownBundle.message("markdown.editor.colorsettingspage.strikethrough"),
-                                         MarkdownHighlighterColors.STRIKETHROUGH_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.explicit-link"),
                 MarkdownHighlighterColors.EXPLICIT_LINK_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.image"),
-                MarkdownHighlighterColors.IMAGE_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.reference-image"),
-                MarkdownHighlighterColors.REFERENCE_IMAGE_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.header-level-1"),
@@ -140,32 +129,16 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
                 MarkdownHighlighterColors.QUOTE_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table"),
-                MarkdownHighlighterColors.TABLE_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.hrule"),
                 MarkdownHighlighterColors.HRULE_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.special-text"),
-                MarkdownHighlighterColors.SPECIAL_TEXT_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.reference-link"),
                 MarkdownHighlighterColors.REFERENCE_LINK_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.wiki-link"),
-                MarkdownHighlighterColors.WIKI_LINK_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.auto-link"),
                 MarkdownHighlighterColors.AUTO_LINK_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.mail-link"),
-                MarkdownHighlighterColors.MAIL_LINK_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.verbatim"),
@@ -188,40 +161,8 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
                 MarkdownHighlighterColors.LIST_ITEM_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.definition-list"),
-                MarkdownHighlighterColors.DEFINITION_LIST_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.definition"),
                 MarkdownHighlighterColors.DEFINITION_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.definition-term"),
-                MarkdownHighlighterColors.DEFINITION_TERM_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-body"),
-                MarkdownHighlighterColors.TABLE_BODY_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-cell"),
-                MarkdownHighlighterColors.TABLE_CELL_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-column"),
-                MarkdownHighlighterColors.TABLE_COLUMN_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-row"),
-                MarkdownHighlighterColors.TABLE_ROW_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-caption"),
-                MarkdownHighlighterColors.TABLE_CAPTION_ATTR_KEY)
-        );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.table-header"),
-                MarkdownHighlighterColors.TABLE_HEADER_ATTR_KEY)
         );
         attributeDescriptors.add(new AttributesDescriptor(
                 MarkdownBundle.message("markdown.editor.colorsettingspage.html-block"),
@@ -235,10 +176,6 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
                 MarkdownBundle.message("markdown.editor.colorsettingspage.reference"),
                 MarkdownHighlighterColors.REFERENCE_ATTR_KEY)
         );
-        attributeDescriptors.add(new AttributesDescriptor(
-                MarkdownBundle.message("markdown.editor.colorsettingspage.abbreviation"),
-                MarkdownHighlighterColors.ABBREVIATION_ATTR_KEY)
-        );
     }
 
     /**
@@ -249,7 +186,19 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
      */
     @Nullable
     public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return null;
+        final Map<String, TextAttributesKey> result = new HashMap<String, TextAttributesKey>();
+
+        result.put("hh1", MarkdownHighlighterColors.HEADER_LEVEL_1_ATTR_KEY);
+        result.put("hh2", MarkdownHighlighterColors.HEADER_LEVEL_2_ATTR_KEY);
+        result.put("hh3", MarkdownHighlighterColors.HEADER_LEVEL_3_ATTR_KEY);
+        result.put("hh4", MarkdownHighlighterColors.HEADER_LEVEL_4_ATTR_KEY);
+        result.put("hh5", MarkdownHighlighterColors.HEADER_LEVEL_5_ATTR_KEY);
+        result.put("hh6", MarkdownHighlighterColors.HEADER_LEVEL_6_ATTR_KEY);
+
+        result.put("bold", MarkdownHighlighterColors.BOLD_ATTR_KEY);
+        result.put("italic", MarkdownHighlighterColors.ITALIC_ATTR_KEY);
+
+        return result;
     }
 
     /**
@@ -283,10 +232,7 @@ public class MarkdownColorSettingsPage implements ColorSettingsPage {
     @NonNls
     @NotNull
     public String getDemoText() {
-        // FIXME Issue #14: Demo text is not highlighted because highlighting is done with an
-        // ExternalAnnotator, which is not triggered in color settings pages.
-        // return SAMPLE_MARKDOWN_DOCUMENT;
-        return " ";
+        return SAMPLE_MARKDOWN_DOCUMENT;
     }
 
     /**

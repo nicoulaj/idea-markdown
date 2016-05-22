@@ -32,6 +32,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import net.nicoulaj.idea.markdown.file.MarkdownFileElementType;
+import net.nicoulaj.idea.markdown.lang.lexer.MarkdownLexerAdapter;
 import net.nicoulaj.idea.markdown.lang.psi.impl.MarkdownFileImpl;
 import net.nicoulaj.idea.markdown.lang.psi.impl.MarkdownPsiElementImpl;
 import org.jetbrains.annotations.NotNull;
@@ -59,17 +60,17 @@ public class MarkdownParserDefinition implements ParserDefinition {
      */
     @NotNull
     public Lexer createLexer(Project project) {
-        return new EmptyLexer();
+        return new MarkdownLexerAdapter();
     }
 
     /**
      * Get the parser for parsing files in the specified project.
      *
      * @param project the project to which the parser is connected.
-     * @return a {@link MarkdownParser} instance.
+     * @return a {@link MarkdownParserAdapter} instance.
      */
     public PsiParser createParser(Project project) {
-        return new MarkdownParser();
+        return new MarkdownParserAdapter();
     }
 
     /**
@@ -88,7 +89,7 @@ public class MarkdownParserDefinition implements ParserDefinition {
      */
     @NotNull
     public TokenSet getWhitespaceTokens() {
-        return TokenSet.EMPTY;
+        return TokenSet.create();
     }
 
     /**

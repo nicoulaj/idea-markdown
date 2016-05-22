@@ -168,10 +168,12 @@
     <fileEditorProvider implementation="net.nicoulaj.idea.markdown.editor.MarkdownPreviewEditorProvider"/>
     <lang.documentationProvider language="Markdown" implementationClass="net.nicoulaj.idea.markdown.documentation.MarkdownDocumentationProvider"/>
     <lang.parserDefinition language="Markdown" implementationClass="net.nicoulaj.idea.markdown.lang.parser.MarkdownParserDefinition"/>
-    <externalAnnotator language="Markdown" implementationClass="net.nicoulaj.idea.markdown.annotator.MarkdownAnnotator"/>
+    <annotator language="Markdown" implementationClass="net.nicoulaj.idea.markdown.annotator.MarkdownHighlightingAnnotator"/>
     <spellchecker.support language="Markdown" implementationClass="net.nicoulaj.idea.markdown.spellchecking.MarkdownSpellcheckingStrategy"/>
     <todoIndexer filetype="Markdown" implementationClass="net.nicoulaj.idea.markdown.todo.MarkdownTodoIndexer"/>
     <applicationService serviceInterface="net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettings" serviceImplementation="net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettings"/>
     <applicationConfigurable instance="net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettingsConfigurable"/>
+    <braceMatcher filetype="Markdown" implementationClass="net.nicoulaj.idea.markdown.braces.MarkdownBraceMatcher"/>
+    <quoteHandler fileType="Markdown" className="net.nicoulaj.idea.markdown.braces.MarkdownQuoteHandler"/>
   </extensions>
 </idea-plugin>
