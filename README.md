@@ -1,5 +1,6 @@
 idea-markdown
 =============
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/nicoulaj/idea-markdown?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **[Markdown](http://daringfireball.net/projects/markdown) language support for [IntelliJ IDEA](http://www.jetbrains.com/idea), [RubyMine](http://www.jetbrains.com/ruby), [PhpStorm](http://www.jetbrains.com/phpstorm), [WebStorm](http://www.jetbrains.com/webstorm), [PyCharm](http://www.jetbrains.com/pycharm), [AppCode](http://www.jetbrains.com/objc) and [Android Studio](http://developer.android.com/sdk/installing/studio.html).**
 
