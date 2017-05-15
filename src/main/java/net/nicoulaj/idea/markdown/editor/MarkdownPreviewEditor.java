@@ -22,6 +22,9 @@ package net.nicoulaj.idea.markdown.editor;
 
 import com.intellij.codeHighlighting.BackgroundEditorHighlighter;
 import com.intellij.ide.structureView.StructureViewBuilder;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.event.DocumentAdapter;
@@ -34,20 +37,24 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.UserDataHolderBase;
 import com.intellij.ui.components.JBScrollPane;
+import com.intellij.util.ui.UIUtil;
 import net.nicoulaj.idea.markdown.MarkdownBundle;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettings;
 import net.nicoulaj.idea.markdown.settings.MarkdownGlobalSettingsListener;
+import org.apache.batik.svggen.font.Point;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.pegdown.PegDownProcessor;
 
-import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import java.awt.*;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * {@link FileEditor} implementation that provides rendering preview for Markdown documents.
@@ -68,9 +75,11 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
     /** The editor name, displayed as the tab name of the editor. */
     public static final String EDITOR_NAME = MarkdownBundle.message("markdown.editor.preview.tab-name");
 
-    /** The path to the stylesheet used for displaying the HTML preview of the document. */
+    /** The path to the stylesheets used for displaying the HTML preview of the document. */
     @NonNls
-    public static final String PREVIEW_STYLESHEET_PATH = "/net/nicoulaj/idea/markdown/preview.css";
+    public static final String DARCULA_PREVIEW_STYLESHEET_PATH = "/net/nicoulaj/idea/markdown/darcula.css";
+    @NonNls
+    public static final String PREVIEW_STYLESHEET_PATH = "/net/nicoulaj/idea/markdown/default.css";
 
     /** The {@link java.awt.Component} used to render the HTML preview. */
     protected final JEditorPane jEditorPane = new JEditorPane();
@@ -124,9 +133,7 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
 
         // Setup the editor pane for rendering HTML.
         final HTMLEditorKit kit = new MarkdownEditorKit(document);
-        final StyleSheet style = new StyleSheet();
-        style.importStyleSheet(MarkdownPreviewEditor.class.getResource(PREVIEW_STYLESHEET_PATH));
-        kit.setStyleSheet(style);
+        resetStyleSheet(kit);
         jEditorPane.setEditorKit(kit);
         jEditorPane.setEditable(false);
 
@@ -136,6 +143,31 @@ public class MarkdownPreviewEditor extends UserDataHolderBase implements FileEdi
 
         // Add a custom link listener which can resolve local link references.
         jEditorPane.addHyperlinkListener(new MarkdownLinkListener(jEditorPane, project, document));
+    }
+
+    private void resetStyleSheet(HTMLEditorKit kit) {
+        final StyleSheet style = new StyleSheet();
+        String customStylesheetPath = MarkdownGlobalSettings.getInstance().getCustomStylesheetPath();
+        URL styleSheetResource = null;
+        if (StringUtils.isNotBlank(customStylesheetPath)) {
+            try {
+                styleSheetResource = new File(customStylesheetPath).toURI().toURL();
+            } catch (MalformedURLException e) {
+                Notifications.Bus.notify(new Notification("Markdown Preview", "Failed to find custom stylesheet path", e.getMessage(), NotificationType.WARNING));
+            }
+        }
+        if (styleSheetResource == null) {
+            // no custom stylesheet, or failed to resolve custom stylesheet url
+
+            // fail over to the default style sheets
+            if (UIUtil.isUnderDarcula()) {
+                styleSheetResource = MarkdownPreviewEditor.class.getResource(DARCULA_PREVIEW_STYLESHEET_PATH);
+            } else {
+                styleSheetResource = MarkdownPreviewEditor.class.getResource(PREVIEW_STYLESHEET_PATH);
+            }
+        }
+        style.importStyleSheet(styleSheetResource);
+        kit.setStyleSheet(style);
     }
 
     /**

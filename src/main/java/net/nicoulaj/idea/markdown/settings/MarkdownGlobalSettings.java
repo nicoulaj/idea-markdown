@@ -86,6 +86,9 @@ public class MarkdownGlobalSettings implements PersistentStateComponent<Element>
     /** Whether the "Strikethroughs" extension should be enabled. */
     private boolean strikethrough = false;
 
+    /** A custom preview stylesheet path provided by the end user which overrides the built in stylesheet path. */
+    private String customStylesheetPath = "";
+
     /**
      * Get the instance of this service.
      *
@@ -369,6 +372,24 @@ public class MarkdownGlobalSettings implements PersistentStateComponent<Element>
     }
 
     /**
+     * Return the custom stylesheet path to use for Markdown preview.
+     * @return a non-null string for the custom stylesheet path, or an empty string if no custom stylesheet has been provided
+     */
+    public String getCustomStylesheetPath() {
+        return customStylesheetPath;
+    }
+
+    public void setCustomStylesheetPath(String customStylesheetPath) {
+        if (customStylesheetPath == null) {
+            customStylesheetPath = "";  // treat nulls as empty strings
+        }
+        if (!customStylesheetPath.equals(this.customStylesheetPath)) {
+            this.customStylesheetPath = customStylesheetPath;
+            notifyListeners();
+        }
+    }
+
+    /**
      * Get the settings state as a DOM element.
      *
      * @return an ready to serialize DOM {@link Element}.
@@ -389,6 +410,7 @@ public class MarkdownGlobalSettings implements PersistentStateComponent<Element>
         element.setAttribute("suppressHTMLBlocks", Boolean.toString(suppressHTMLBlocks));
         element.setAttribute("suppressInlineHTML", Boolean.toString(suppressInlineHTML));
         element.setAttribute("strikethrough", Boolean.toString(strikethrough));
+        element.setAttribute("customStylesheetPath", this.customStylesheetPath);
         return element;
     }
 
@@ -425,6 +447,8 @@ public class MarkdownGlobalSettings implements PersistentStateComponent<Element>
         if (value != null) suppressInlineHTML = Boolean.parseBoolean(value);
         value = element.getAttributeValue("strikethrough");
         if (value != null) strikethrough = Boolean.parseBoolean(value);
+        value = element.getAttributeValue("customStylesheetPath");
+        if (value != null) customStylesheetPath = value;
         notifyListeners();
     }
 

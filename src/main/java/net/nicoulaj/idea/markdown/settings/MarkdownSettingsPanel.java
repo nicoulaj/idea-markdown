@@ -20,7 +20,16 @@
  */
 package net.nicoulaj.idea.markdown.settings;
 
+import com.intellij.openapi.fileChooser.FileChooser;
+import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.Consumer;
+
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * UI form for {@link MarkdownGlobalSettings} edition.
@@ -83,6 +92,14 @@ public class MarkdownSettingsPanel {
     /** Form element for {@link MarkdownGlobalSettings#strikethrough}. */
     public JCheckBox strikethroughCheckBox;
 
+    private JRadioButton defaultStylesheetRadioButton;
+
+    private JRadioButton customStylesheetRadioButton;
+
+    private JTextField stylesheetLocationTextBox;
+
+    private JButton stylesheetBrowseButton;
+
     /** Description label for {@link #suppressInlineHTMLCheckBox}. */
     private JLabel suppressInlineHTMLDescriptionLabel;
 
@@ -118,4 +135,58 @@ public class MarkdownSettingsPanel {
 
     /** Description label for {@link #strikethroughCheckBox}. */
     private JLabel strikethroughDescriptionLabel;
+
+    public String getCustomStylesheetPath() {
+        if (defaultStylesheetRadioButton.isSelected()) {
+            return "";
+        } else {
+            return stylesheetLocationTextBox.getText();
+        }
+    }
+
+    public void setCustomStylesheetPath(String customStylesheetPath) {
+        if (customStylesheetPath == null || customStylesheetPath.trim().equals("")) {
+            defaultStylesheetRadioButton.setSelected(true);
+            stylesheetLocationTextBox.setEnabled(false);
+            stylesheetBrowseButton.setEnabled(false);
+        } else {
+            stylesheetLocationTextBox.setText(customStylesheetPath);
+            customStylesheetRadioButton.setSelected(true);
+            stylesheetLocationTextBox.setEnabled(true);
+            stylesheetBrowseButton.setEnabled(true);
+        }
+    }
+
+    public void init() {
+        // init the ui. we have several components that need to work together as a group: the stylesheet handlers
+        defaultStylesheetRadioButton.addChangeListener(new ChangeListener() {
+            @Override public void stateChanged(ChangeEvent changeEvent) {
+                if (defaultStylesheetRadioButton.isSelected()) {
+                    stylesheetLocationTextBox.setEnabled(false);
+                    stylesheetBrowseButton.setEnabled(false);
+                } else {
+                    stylesheetLocationTextBox.setEnabled(true);
+                    stylesheetBrowseButton.setEnabled(true);
+                }
+            }
+        });
+
+        stylesheetBrowseButton.addActionListener(new ActionListener() {
+            @Override public void actionPerformed(ActionEvent actionEvent) {
+                Consumer<VirtualFile> consumer = new Consumer<VirtualFile>(){
+                    @Override public void consume(VirtualFile virtualFile) {
+                        if (virtualFile != null && "css".equals(virtualFile.getExtension())) {
+                            stylesheetLocationTextBox.setText(virtualFile.getPath());
+                        }
+                    }
+                };
+                FileChooser.chooseFile(new FileChooserDescriptor(true, false, false, false, false, false),
+                                       null,
+                                       stylesheetBrowseButton,
+                                       null,
+                                       consumer
+                                       );
+            }
+        });
+    }
 }
